@@ -1,8 +1,11 @@
 package spring.basic.review.memberTest;
 
 import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+import org.springframework.beans.factory.annotation.Autowired;
+import spring.basic.review.AppConfig;
 import spring.basic.review.member.*;
 
 import java.util.NoSuchElementException;
@@ -12,7 +15,13 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 
 public class memberServiceTest {
 
-    MemberService memberService = new MemberServiceImpl();
+    MemberService memberService;
+
+    @BeforeEach
+    public void beforeEach(){
+        AppConfig appConfig = new AppConfig();
+        memberService = appConfig.memberService();
+    }
 
     @Test
     @DisplayName("회원가입")
